@@ -26,11 +26,11 @@ app.get('/api/v1/tours', (req, res) => {
 
 app.post('/api/v1/tours', (req, res) => {
   const newTour = { ...req.body };
-  tours.push(newTour);
-  console.log(tours);
+  const newTours = [...tours, newTour];
+
   fs.writeFile(
     './constants/dev-data/data/tours-simple.json',
-    JSON.stringify(tours),
+    JSON.stringify(newTours),
     (error) => {
       res.status(201).json({
         status: 'success',
