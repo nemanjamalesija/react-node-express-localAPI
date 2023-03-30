@@ -8,10 +8,11 @@ const server = http.createServer(app);
 
 app.use(json());
 app.use(cors());
+const port = 3000;
 
-const tours = fs
-  .readFileSync('./constants/dev-data/data/tours-simple.json')
-  .toString();
+const tours = JSON.parse(
+  fs.readFileSync('./constants/dev-data/data/tours-simple.json', 'utf-8')
+);
 
 app.get('/api/v1/tours', (req, res) => {
   res.status(200).json({
@@ -23,6 +24,6 @@ app.get('/api/v1/tours', (req, res) => {
   });
 });
 
-server.listen(3001, () => {
-  console.log('Server listening on port 3001');
+server.listen(port, () => {
+  console.log('Server listening on port ' + port);
 });
