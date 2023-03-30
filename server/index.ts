@@ -24,6 +24,21 @@ app.get('/api/v1/tours', (req, res) => {
   });
 });
 
+app.post('/api/v1/tours', (req, res) => {
+  const newTour = JSON.stringify({ ...req.body });
+  fs.writeFile(
+    './constants/dev-data/data/tours-simple.json',
+    'utf-8',
+    (error) => {
+      res.status(201).json({
+        status: 'success',
+        data: { ...tours, newTour },
+      });
+    }
+  );
+  res.end('Tour added!');
+});
+
 server.listen(port, () => {
   console.log('Server listening on port ' + port);
 });
