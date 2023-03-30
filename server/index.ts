@@ -25,18 +25,19 @@ app.get('/api/v1/tours', (req, res) => {
 });
 
 app.post('/api/v1/tours', (req, res) => {
-  const newTour = JSON.stringify({ ...req.body });
+  const newTour = { ...req.body };
+  tours.push(newTour);
+  console.log(tours);
   fs.writeFile(
     './constants/dev-data/data/tours-simple.json',
-    'utf-8',
+    JSON.stringify(tours),
     (error) => {
       res.status(201).json({
         status: 'success',
-        data: { ...tours, newTour },
+        data: { tour: newTour },
       });
     }
   );
-  res.end('Tour added!');
 });
 
 server.listen(port, () => {
