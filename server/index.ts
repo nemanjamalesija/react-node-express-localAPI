@@ -2,12 +2,16 @@ import express, { json } from 'express';
 import http from 'http';
 import cors from 'cors';
 import fs from 'fs';
+import morgan from 'morgan';
 
 const app = express();
+app.use('');
 const server = http.createServer(app);
 
 app.use(json());
 app.use(cors());
+app.use(morgan('dev'));
+
 const port = 3000;
 
 const tours = JSON.parse(
