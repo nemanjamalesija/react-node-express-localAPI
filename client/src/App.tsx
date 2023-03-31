@@ -53,24 +53,23 @@ function App() {
     });
   };
 
-  const submitHandler = (e: any) => {
+  const submitHandler = async (e: any) => {
     e.preventDefault();
     console.log(JSON.stringify(tour));
 
-    fetch('http://localhost:3000/api/v1/tours', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(tour),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log('Success:', data);
-      })
-      .catch((error) => {
-        console.error('Error:', error);
+    try {
+      const response = await fetch('http://localhost:3000/api/v1/tours', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(tour),
       });
+
+      const data = await response.json();
+    } catch (error) {
+      console.error('Error:', error);
+    }
   };
 
   return (
