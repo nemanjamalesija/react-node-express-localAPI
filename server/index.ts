@@ -3,6 +3,7 @@ import http from 'http';
 import cors from 'cors';
 import fs from 'fs';
 import morgan from 'morgan';
+import { Request, Response, NextFunction } from 'express';
 
 const app = express();
 const server = http.createServer(app);
@@ -18,7 +19,7 @@ const tours = JSON.parse(
 );
 
 //handlers
-const getRoutes = (req, res) => {
+const getRoutes = (req: Request, res: Response) => {
   res.status(200).json({
     status: 'success',
     results: tours.length,
@@ -28,7 +29,7 @@ const getRoutes = (req, res) => {
   });
 };
 
-const addTour = (req, res) => {
+const addTour = (req: Request, res: Response) => {
   const newTour = { ...req.body };
   const newTours = [...tours, newTour];
 
