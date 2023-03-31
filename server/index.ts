@@ -12,6 +12,18 @@ app.use(json());
 app.use(cors());
 app.use(morgan('dev'));
 
+interface CustomRequest extends Request {
+  time?: string;
+}
+
+const logDate = (req: CustomRequest, res: Response, next: NextFunction) => {
+  const date = new Date().toISOString();
+  req.time = date;
+  next();
+};
+
+app.use(logDate);
+
 const port = 3000;
 
 const tours = JSON.parse(
@@ -19,9 +31,10 @@ const tours = JSON.parse(
 );
 
 //handlers
-const getRoutes = (req: Request, res: Response) => {
+const getRoutes = (req: CustomRequest, res: Response) => {
   res.status(200).json({
     status: 'success',
+    time: req.time,
     results: tours.length,
     data: {
       tours,
@@ -29,7 +42,7 @@ const getRoutes = (req: Request, res: Response) => {
   });
 };
 
-const addTour = (req: Request, res: Response) => {
+const addTour = (req: CustomRequest, res: Response) => {
   const newTour = { ...req.body };
   const newTours = [...tours, newTour];
 
@@ -39,6 +52,7 @@ const addTour = (req: Request, res: Response) => {
     (error) => {
       res.status(201).json({
         status: 'success',
+        time: req.time,
         data: { tour: newTour },
       });
     }
