@@ -5,7 +5,6 @@ import fs from 'fs';
 import morgan from 'morgan';
 
 const app = express();
-app.use('');
 const server = http.createServer(app);
 
 app.use(json());
@@ -18,7 +17,8 @@ const tours = JSON.parse(
   fs.readFileSync('./constants/dev-data/data/tours-simple.json', 'utf-8')
 );
 
-app.get('/api/v1/tours', (req, res) => {
+//handlers
+const getRoutes = (req, res) => {
   res.status(200).json({
     status: 'success',
     results: tours.length,
@@ -26,9 +26,9 @@ app.get('/api/v1/tours', (req, res) => {
       tours,
     },
   });
-});
+};
 
-app.post('/api/v1/tours', (req, res) => {
+const addTour = (req, res) => {
   const newTour = { ...req.body };
   const newTours = [...tours, newTour];
 
@@ -42,8 +42,12 @@ app.post('/api/v1/tours', (req, res) => {
       });
     }
   );
-});
+};
 
+const toursRouter = express.Router();
+app.use('/api/v1/tours', toursRouter);
+
+toursRouter.route('/').get(getRoutes).post(addTour);
 server.listen(port, () => {
   console.log('Server listening on port ' + port);
 });
