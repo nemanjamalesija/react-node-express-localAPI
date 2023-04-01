@@ -1,3 +1,5 @@
+import { Request } from 'express';
+
 export type singleMovie = {
   rank: number;
   title: string;
@@ -13,4 +15,8 @@ export type singleMovie = {
   writers: string[];
   imdbid: string;
   bookmarkered?: boolean;
+};
+
+export type CustomRequest = Request & {
+  time?: string;
 };
