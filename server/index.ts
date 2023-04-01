@@ -10,7 +10,6 @@ const server = http.createServer(app);
 
 app.use(json());
 app.use(cors());
-app.use(morgan('dev'));
 
 interface CustomRequest extends Request {
   time?: string;
