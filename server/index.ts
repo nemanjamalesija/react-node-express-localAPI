@@ -1,5 +1,4 @@
 import express, { json } from 'express';
-import http from 'http';
 import cors from 'cors';
 import morgan from 'morgan';
 import { Response, NextFunction } from 'express';
