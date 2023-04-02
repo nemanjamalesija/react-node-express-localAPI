@@ -4,6 +4,7 @@ import morgan from 'morgan';
 import { Response, NextFunction } from 'express';
 import { CustomRequest } from './constants/types';
 import { router as toursRouter } from './routes/toursRoutes';
+import { router as userRouter } from './routes/userRoutes';
 
 const app = express();
 
@@ -20,5 +21,6 @@ const logDate = (req: CustomRequest, res: Response, next: NextFunction) => {
 app.use(logDate);
 
 app.use('/api/v1/tours', toursRouter);
+app.use('/api/v1/users', userRouter);
 
 export { app };
