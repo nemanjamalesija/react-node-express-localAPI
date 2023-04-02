@@ -1,7 +1,9 @@
 import http from 'http';
 import { app } from '.';
+import dotenv from 'dotenv';
 
-const port = 3000;
+const port = process.env.port;
+dotenv.config({ path: './config.env' });
 
 const server = http.createServer(app);
 
