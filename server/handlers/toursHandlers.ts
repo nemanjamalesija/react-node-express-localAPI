@@ -35,4 +35,13 @@ const addTour = (req: CustomRequest, res: Response) => {
   );
 };
 
-export { getRoutes, addTour };
+const checkBody = (req: CustomRequest, res: Response, next: NextFunction) => {
+  if (!req.body.price || !req.body.name || !req.body.rating)
+    return res.status(404).json({
+      message: 'Invalid tour informations',
+    });
+
+  next();
+};
+
+export { getRoutes, addTour, checkBody };
