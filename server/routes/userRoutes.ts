@@ -5,7 +5,7 @@ import {
   getAllUsersHandler,
   updateUser,
   deleteUser,
-} from '../handlers/usersHandlers.js';
+} from '../handlers/usersHandlers';
 
 const router = express.Router();
 

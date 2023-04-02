@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { Request, Response, NextFunction } from 'express';
+import { Response, NextFunction } from 'express';
 import { CustomRequest } from '../constants/types';
 
 const tours = JSON.parse(

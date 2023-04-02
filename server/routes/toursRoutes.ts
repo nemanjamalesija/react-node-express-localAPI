@@ -1,5 +1,4 @@
 import express from 'express';
-import fs from 'fs';
 import { addTour, getRoutes, checkBody } from '../handlers/toursHandlers';
 
 const router = express.Router();
